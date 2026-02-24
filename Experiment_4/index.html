@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Job Posting Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Job Posting Dashboard</h1>
+        <p>Post jobs instantly. Watch them appear live.</p>
+    </header>
+
+    <main class="container">
+
+        <!-- Job Posting Form -->
+        <section class="form-section">
+            <h2>Create Job Posting</h2>
+
+            <form id="jobForm">
+
+                <div class="form-group">
+                    <label>Job Title</label>
+                    <input type="text" id="jobTitle" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Company Name</label>
+                    <input type="text" id="companyName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="location" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Job Type</label>
+                    <select id="jobType" required>
+                        <option value="">Select Type</option>
+                        <option>Full-Time</option>
+                        <option>Part-Time</option>
+                        <option>Internship</option>
+                        <option>Remote</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Salary (Optional)</label>
+                    <input type="text" id="salary">
+                </div>
+
+                <div class="form-group">
+                    <label>Job Description</label>
+                    <textarea id="description" required></textarea>
+                </div>
+
+                <button type="submit">Post Job</button>
+
+            </form>
+        </section>
+
+
+        <!-- Job Cards Display Section -->
+        <section class="cards-section">
+            <h2>Available Job Openings</h2>
+            <div id="jobCardsContainer" class="cards-container">
+                <p class="empty-message">No jobs posted yet.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
