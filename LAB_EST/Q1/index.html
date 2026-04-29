@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Student Registration Form</h2>
+    <form id="registrationForm" action="#">
+        <div class="form-group">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile" required>
+        </div>
+ 
+        <div class="form-group">
+            <label>Gender:</label>
+            <div class="radio-group">
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="course">Course:</label>
+            <select id="course" name="course">
+                <option value="btech">B.Tech</option>
+                <option value="mca">MCA</option>
+                <option value="mba">MBA</option>
+                <option value="bsc">B.Sc</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Skills:</label>
+            <div class="checkbox-group">
+                <input type="checkbox" id="html" name="skills" value="html">
+                <label for="html">HTML</label>
+                <input type="checkbox" id="css" name="skills" value="css">
+                <label for="css">CSS</label>
+                <input type="checkbox" id="js" name="skills" value="js">
+                <label for="js">JavaScript</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <textarea id="address" name="address"></textarea>
+        </div>
+
+        <div class="buttons">
+            <button type="submit" class="submit-btn">Submit</button>
+            <button type="reset" class="reset-btn">Reset</button>
+        </div>
+    </form>
+</div>
+
+<!-- Modal -->
+<div id="dataModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Registration Successful!</h3>
+            <span class="close-btn">&times;</span>
+        </div>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('registrationForm');
+    const modal = document.getElementById('dataModal');
+    const modalBody = document.getElementById('modalBody');
+    const closeBtn = document.querySelector('.close-btn');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const skills = formData.getAll('skills').map(s => s.toUpperCase()).join(', ') || 'None';
+        const course = document.getElementById('course').options[document.getElementById('course').selectedIndex].text;
+        
+        const data = [
+            { label: 'Full Name', value: formData.get('name') },
+            { label: 'Email', value: formData.get('email') },
+            { label: 'Mobile', value: formData.get('mobile') },
+            { label: 'Gender', value: formData.get('gender') },
+            { label: 'Course', value: course },
+            { label: 'Skills', value: skills },
+            { label: 'Address', value: formData.get('address') }
+        ];
+
+        let html = '';
+        data.forEach(item => {
+            html += `
+                <div class="data-row">
+                    <span class="data-label">${item.label}:</span>
+                    <span class="data-value">${item.value}</span>
+                </div>
+            `;
+        });
+
+        modalBody.innerHTML = html;
+        modal.style.display = 'block';
+    });
+
+    closeBtn.onclick = () => modal.style.display = 'none';
+    window.onclick = (e) => {
+        if (e.target == modal) modal.style.display = 'none';
+    };
+</script>
+</body>
+</html>
